@@ -69,6 +69,10 @@ export default {
   methods: {
     setupImage() {
       this.hasImage = true;
+      this.imageUploadPanel.decorateImage({
+        brightness: this.brightness,
+        contrast: this.contrast,
+      });
     },
     changeBrightness(value) {
       this.brightness = value;
