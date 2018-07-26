@@ -1,21 +1,4 @@
-# republic-audience-test
-
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
-
-### Compiles and minifies for production
-```
-yarn run build
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
+# How to test
+1. yarn install
+2. yarn serve
+3. Go to localhost:8080
