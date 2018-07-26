@@ -1,28 +1,30 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <UploadNewImagePage/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import UploadNewImagePage from './components/UploadNewImagePage.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    UploadNewImagePage
   }
 }
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  font-family: PingFangTC-Regular;
+}
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+* {
+  box-sizing: border-box;
 }
 </style>
