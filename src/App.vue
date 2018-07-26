@@ -18,11 +18,13 @@ export default {
 <style>
 #app {
   font-family: PingFangTC-Regular;
+  width: 100%;
+  overflow-x: hidden;
 }
 body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  width: 100vw;
 }
 * {
   box-sizing: border-box;

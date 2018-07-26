@@ -5,6 +5,7 @@
       class="scroll-section"
       ref="scroll-section"
       @mousedown="startScrolling"
+      @touchstart="startScrolling"
       v-bind:style="{ cursor: disabled ? '' : 'pointer' }"
     >
       <div class="light-bar" v-bind:style="{ background: subColor }" />
@@ -43,11 +44,12 @@ export default {
     this.scrollSectionElem = this.$refs['scroll-section'];
   },
   beforeDestroy: function () {
-    window.removeEventListener('mousemove', this.stopScrolling);
+    this.removeScrollListener();
   },
   methods: {
     scrollListener(event) {
-      this.moveBall(event.clientX)
+      const mouseX = event.clientX || event.touches[0].pageX;
+      this.moveBall(mouseX)
     },
     moveBall(mouseX) {
       this.scrollSectionElem = this.$refs['scroll-section'];
@@ -64,16 +66,22 @@ export default {
       }
       this.onValueChange(this.value);
     },
-    stopScrolling() {
+    removeScrollListener() {
+      window.removeEventListener('touchmove', this.scrollListener);
       window.removeEventListener('mousemove', this.scrollListener);
+      window.removeEventListener('mouseup', this.removeScrollListener);
+      window.removeEventListener('touchend', this.removeScrollListener);
     },
     startScrolling(event) {
       if (this.disabled) {
         return;
       }
-      this.moveBall(event.clientX)
+      const mouseX = event.clientX || event.touches[0].pageX;
+      this.moveBall(mouseX);
+      window.addEventListener('touchmove', this.scrollListener);
       window.addEventListener('mousemove', this.scrollListener);
-      window.addEventListener('mouseup', this.stopScrolling);
+      window.addEventListener('mouseup', this.removeScrollListener);
+      window.addEventListener('touchend', this.removeScrollListener);
     }
   }
 }
