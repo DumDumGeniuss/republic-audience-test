@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <canvas width="400" height="200" ref="canvas" class="canvas">
+    <canvas width="1000" height="500" ref="canvas" class="canvas">
 
     </canvas>
     <div class="control-panel">
@@ -40,32 +40,32 @@ export default {
     // initial canvas
     this.canvasElem = this.$refs['canvas'];
     const context = this.canvasElem.getContext('2d');
-    context.font = '24px PingFangTC-Regular';
+    context.font = '36px PingFangTC-Regular';
     context.textAlign = 'center';
     context.fillStyle = '#8392A6';
     context.fillText('No picutre uploaded', this.canvasElem.width / 2, this.canvasElem.height / 2);
-    this.originImageValue = context.getImageData(0, 0, 400, 200);
+    this.originImageValue = context.getImageData(0, 0, 1000, 500);
   },
   methods: {
     decorateImage: function (params) {
       const brightness = params.brightness;
       const contrast = params.contrast;
       const context = this.canvasElem.getContext('2d');
-      const imageData = context.getImageData(0, 0, 400, 200);
+      const imageData = context.getImageData(0, 0, 1000, 500);
 
       // Birghtness
       for (let i = 0; i < imageData.data.length; i += 4) {
-        imageData.data[i] = this.originImageValue.data[i] + parseInt(255 * (brightness / 100), 10);
-        imageData.data[i + 1] = this.originImageValue.data[i + 1] + parseInt(255 * (brightness / 100), 10);
-        imageData.data[i + 2] = this.originImageValue.data[i + 2] + parseInt(255 * (brightness / 100), 10);
+        imageData.data[i] = this.originImageValue.data[i] + 255 * (brightness / 100);
+        imageData.data[i + 1] = this.originImageValue.data[i + 1] + 255 * (brightness / 100);
+        imageData.data[i + 2] = this.originImageValue.data[i + 2] + 255 * (brightness / 100);
       }
 
       const factor = (255 + contrast * 2.55) / (255.01 - contrast * 2.55);
       // Constrast
       for (let i = 0; i < imageData.data.length; i += 4) {
-        imageData.data[i] = factor * (imageData.data[i] - 128) + 128;
-        imageData.data[i + 1] = factor * (imageData.data[i + 1] - 128) + 128;
-        imageData.data[i + 2] = factor * (imageData.data[i + 2] - 128) + 128;
+        imageData.data[i] = factor * (imageData.data[i] - 128) + 128, 10;
+        imageData.data[i + 1] = factor * (imageData.data[i + 1] - 128) + 128, 10;
+        imageData.data[i + 2] = factor * (imageData.data[i + 2] - 128) + 128, 10;
       }
 
       context.putImageData(imageData, 0, 0);
@@ -79,7 +79,7 @@ export default {
           const imgHeight = img.height * (this.canvasElem.width / img.width);
           const context = this.canvasElem.getContext('2d');
           context.drawImage(img, 0, 0, this.canvasElem.width, imgHeight);
-          this.originImageValue = context.getImageData(0, 0, 400, 200);
+          this.originImageValue = context.getImageData(0, 0, 1000, 500);
           this.onImageUploaded();
         }
         img.src = event.target.result;
